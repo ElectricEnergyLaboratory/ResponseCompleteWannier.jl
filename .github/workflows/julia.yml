@@ -8,6 +8,8 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    env:
+      JULIA_PKG_PRECOMPILE_AUTO: '0'
     steps:
       - uses: actions/checkout@v4
       - uses: julia-actions/setup-julia@v2
@@ -16,5 +18,10 @@ jobs:
       - uses: julia-actions/cache@v2
       - name: Instantiate and show versions
         run: julia --project -e 'using Pkg; Pkg.instantiate(); Pkg.status()'
+      - name: Preserve resolved dependencies
+        uses: actions/upload-artifact@v4
+        with:
+          name: julia-manifest
+          path: Manifest.toml
       - name: Test
         run: julia --project -e 'using Pkg; Pkg.test()'

@@ -79,5 +79,7 @@ physical inputs, numerical parameters, perturbation and frequency
 conventions, convergence status, and tolerances necessary to reproduce the
 calculation. Do not report synthetic examples as physical benchmarks.
 
-No upstream package versions are currently installed or pinned by this
-project, and no manifest or benchmark metadata has yet been generated.
+`Project.toml` pins DFTK v0.8.1 and Wannier v0.3.6. A Julia manifest records
+the resolved dependency versions; numerical benchmark metadata must record the
+versions actually used for each run. No physical benchmark has yet been
+produced.

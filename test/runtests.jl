@@ -1,6 +1,16 @@
 using LinearAlgebra
 using Test
 using ResponseCompleteWannier
+using DFTK
+using Wannier
+
+@testset "Upstream foundations" begin
+    @test Base.pkgversion(DFTK) == v"0.8.1"
+    @test Base.pkgversion(Wannier) == v"0.3.6"
+    @test !isnothing(Base.get_extension(DFTK, :DFTKWannierExt))
+    @test isdefined(DFTK, :apply_χ0)
+    @test isdefined(Wannier, :Model)
+end
 
 @testset "Schur reduction and auxiliary linearization" begin
     A = ComplexF64[2.5 0.2im; -0.2im 3.0]
