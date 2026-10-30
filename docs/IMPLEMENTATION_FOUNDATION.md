@@ -29,15 +29,15 @@ upstream data merely to wrap it.
 
 ## Source audit: released upstream versions
 
-The following is a source inspection, **not** an installed-package or
-numerical integration test. It concerns DFTK **v0.8.1**
+The following source inspection concerns DFTK **v0.8.1**
 ([Project.toml](https://github.com/JuliaMolSim/DFTK.jl/blob/v0.8.1/Project.toml))
 and Wannier **v0.3.6**
 ([Project.toml](https://github.com/qiaojunfeng/Wannier.jl/blob/v0.3.6/Project.toml)).
 DFTK v0.8.1 declares Julia 1.10 compatibility and Wannier 0.3.2 compatibility,
-which includes Wannier v0.3.6. Reinspect the actual installed versions before
-implementing an adapter; these source references do not establish which
-versions are installed or validated.
+which includes Wannier v0.3.6. The resolved package source tree hashes match
+the inspected tags, and CI checks package loading and DFTK's Wannier
+extension. This is not a numerical integration test. Reinspect the actual
+installed versions and sources before implementing an adapter.
 
 - DFTK provides `self_consistent_field` and its Wannier extension provides
   `Wannier.Model(scfres; ...)`. The latter writes Wannier90-format input files
@@ -79,7 +79,7 @@ physical inputs, numerical parameters, perturbation and frequency
 conventions, convergence status, and tolerances necessary to reproduce the
 calculation. Do not report synthetic examples as physical benchmarks.
 
-`Project.toml` pins DFTK v0.8.1 and Wannier v0.3.6. A Julia manifest records
-the resolved dependency versions; numerical benchmark metadata must record the
-versions actually used for each run. No physical benchmark has yet been
-produced.
+`Project.toml` pins DFTK v0.8.1 and Wannier v0.3.6. `Manifest.toml` records
+the dependency versions resolved with Julia 1.10.12; numerical benchmark
+metadata must record the versions actually used for each run. No physical
+benchmark has yet been produced.
