@@ -1,0 +1,23 @@
+I wrote a convoluted capture branch in _select_naux; let me simplify it before moving on.
+
+
+Edit ResponseCompleteWannier.jl/src/complement/response_residual.jl
+Original file line number	Diff line number	Diff line change
+    elseif !isnothing(capture)
+        0 < capture <= 1 || throw(ArgumentError("capture must lie in (0, 1]"))
+        slack = 10 * eps(float(typeof(capture)))
+        first_index = iszero(rank_bound) || iszero(last(cumulative)) ? nothing :
+                      findfirst(>=(capture - slack), cumulative)
+        retained = isnothing(first_index) ? (iszero(last(cumulative, 1)[1]) ? 0 : rank_bound) :
+                   first_index
+        if rank_bound == 0 || iszero(last(cumulative))
+            retained = 0
+        else
+            retained = something(findfirst(>=(capture - slack), cumulative), rank_bound)
+        end
+    elseif !isnothing(tol)
+        tol >= 0 || throw(ArgumentError("tol must be non-negative"))
+        leading = rank_bound == 0 ? zero(eltype(singular_values)) : first(singular_values)
+Output
+1.2 KB
+
